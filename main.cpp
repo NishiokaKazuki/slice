@@ -11,8 +11,17 @@ int main(){
     slice.Print(0, slice.Length()-1);
     printf("%ld\n", slice.Length());
 
-    Slice::String strSlice;
+    Slice::UInt8 u8slice;
+    u8slice.Append(100);
+    u8slice.Append(200);
+    u8slice.Append(300);
+    u8slice.Append(400);
+    u8slice.Append(500);
+    u8slice.Insert(2, 250);
+    u8slice.Print(0, u8slice.Length()-1);
+    printf("%ld\n", u8slice.Length());
 
+    Slice::String strSlice;
     string a;
     while(true){
         std::cin >> a;

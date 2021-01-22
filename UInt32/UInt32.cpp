@@ -21,7 +21,7 @@ namespace Slice{
         if (this->Length() <= rightIdx) {return LIST_ERROR;}
 
         for(uint64 i = leftIdx; i<=rightIdx; i++){
-            printf("%d ", *(uint32*)(this->Get(i)));
+            printf("%u ", *(uint32*)(this->Get(i)));
         }
         std::cout << "\n";
         return LIST_OK;
