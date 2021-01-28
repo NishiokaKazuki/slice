@@ -12,12 +12,24 @@ List::~List(){
     }
 }
 
-void* List::Get(uint64 index){
+void* List::GetPtr(uint64 index){
     if (index >= listSize) {return NULL;}
 
     Node* node = move(index);
     if (node == NULL) {return NULL;}
     return node->valuePtr;
+}
+
+int8 List::SetPtr(uint64 index, void* valuePtr){
+    if (index >= listSize) {return LIST_ERROR;}
+
+    Node* node = move(index);
+    if (node == NULL) {return LIST_ERROR;}
+
+    delete node->valuePtr;
+    node->valuePtr = valuePtr;
+
+    return LIST_OK;
 }
 
 int8 List::AppendPtr(Node* newPtr){

@@ -46,10 +46,11 @@ class List {
     public:
     List();
     ~List();
-    void* Get   (uint64);
-    int8  AppendPtr(Node*);
-    int8  InsertPtr(uint64, Node*);
-    int8  Remove(uint64);
+    void* GetPtr    (uint64);
+    int8  SetPtr    (uint64, void*);
+    int8  AppendPtr (Node*);
+    int8  InsertPtr (uint64, Node*);
+    int8  Remove    (uint64);
     uint64 Length();
     Node* CreateNewPtr(void*);
 

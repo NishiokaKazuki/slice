@@ -1,13 +1,41 @@
-CPP_FILES := ./list.cpp \
-			 Int8/Int8.cpp \
-			 Int16/Int16.cpp \
-			 Int32/Int32.cpp \
-			 Int64/Int64.cpp \
-			 UInt8/UInt8.cpp \
-			 UInt16/UInt16.cpp \
-			 UInt32/UInt32.cpp \
-			 UInt64/UInt64.cpp \
-			 String/String.cpp
+OUT = lib/alib.a
+CC = g++
+SDIR = src
+ODIR = obj
+INC = -Iinc
+CFLAGS = -Wall -O2
 
-build:
-	g++ -o out main.cpp $(CPP_FILES)
+CPP_FILES = ./list.cpp \
+		./Int8.cpp \
+		./Int16.cpp \
+		./Int32.cpp \
+		./Int64.cpp \
+		./UInt8.cpp \
+		./UInt16.cpp \
+		./UInt32.cpp \
+		./UInt64.cpp \
+		./String.cpp
+
+_OBJS = list.o \
+		Int8.o \
+		Int16.o \
+		Int32.o \
+		Int64.o \
+		UInt8.o \
+		UInt16.o \
+		UInt32.o \
+		UInt64.o \
+		String.o
+
+OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
+
+$(ODIR)/%.o: $(SDIR)/%.cpp
+	$(CC) -c $(INC) -o $@ $< $(CFLAGS)
+
+$(OUT): $(OBJS)
+	ar rvs $(OUT) $^
+
+.PHONY: clean
+
+clean:
+	rm -f $(ODIR)/*.o $(OUT)
