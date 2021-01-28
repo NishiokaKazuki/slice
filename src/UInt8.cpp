@@ -1,20 +1,18 @@
 #include "./UInt8.h"
 
 namespace Slice{
-    int8 UInt8::Append(uint8 value){
-        uint8* newValuePtr = new uint8;
-        *newValuePtr = value;
-        this->AppendPtr(this->CreateNewPtr(newValuePtr));
+    UInt8::UInt8(){
+        this->SetType(TYPE_UINT8);
+    }
 
-        return LIST_OK;
+    UInt8::~UInt8(){}
+
+    int8 UInt8::Append(uint8 value){
+        return this->AppendPtr(this->CreateNewPtr(&value));
     }
 
     int8 UInt8::Insert(uint64 index, uint8 value){
-        uint8* newValuePtr = new uint8;
-        *newValuePtr = value;
-        this->InsertPtr(index, this->CreateNewPtr(newValuePtr));
-
-        return LIST_OK;
+        return this->InsertPtr(index, this->CreateNewPtr(&value));
     }
 
     uint8 UInt8::Get(uint64 index){
@@ -22,9 +20,7 @@ namespace Slice{
     }
 
     int8 UInt8::Set(uint64 index, uint8 value){
-        uint8* newValuePtr = new uint8;
-        *newValuePtr = value;
-        return this->SetPtr(index, newValuePtr);
+        return this->SetPtr(index, &value);
     }
 
     int8 UInt8::Print(uint64 leftIdx, uint64 rightIdx){

@@ -1,20 +1,18 @@
 #include "./UInt16.h"
 
 namespace Slice{
-    int8 UInt16::Append(uint16 value){
-        uint16* newValuePtr = new uint16;
-        *newValuePtr = value;
-        this->AppendPtr(this->CreateNewPtr(newValuePtr));
+    UInt16::UInt16(){
+        this->SetType(TYPE_UINT16);
+    }
 
-        return LIST_OK;
+    UInt16::~UInt16(){}
+
+    int8 UInt16::Append(uint16 value){
+        return this->AppendPtr(this->CreateNewPtr(&value));
     }
 
     int8 UInt16::Insert(uint64 index, uint16 value){
-        uint16* newValuePtr = new uint16;
-        *newValuePtr = value;
-        this->InsertPtr(index, this->CreateNewPtr(newValuePtr));
-
-        return LIST_OK;
+        return this->InsertPtr(index, this->CreateNewPtr(&value));
     }
 
     uint16 UInt16::Get(uint64 index){
@@ -22,9 +20,7 @@ namespace Slice{
     }
 
     int8 UInt16::Set(uint64 index, uint16 value){
-        uint16* newValuePtr = new uint16;
-        *newValuePtr = value;
-        return this->SetPtr(index, newValuePtr);
+        return this->SetPtr(index, &value);
     }
 
     int8 UInt16::Print(uint64 leftIdx, uint64 rightIdx){

@@ -1,20 +1,18 @@
 #include "./Int16.h"
 
 namespace Slice{
-    int8 Int16::Append(int16 value){
-        int16* newValuePtr = new int16;
-        *newValuePtr = value;
-        this->AppendPtr(this->CreateNewPtr(newValuePtr));
+    Int16::Int16(){
+        this->SetType(TYPE_INT16);
+    }
 
-        return LIST_OK;
+    Int16::~Int16(){}
+
+    int8 Int16::Append(int16 value){
+        return this->AppendPtr(this->CreateNewPtr(&value));
     }
 
     int8 Int16::Insert(uint64 index, int16 value){
-        int16* newValuePtr = new int16;
-        *newValuePtr = value;
-        this->InsertPtr(index, this->CreateNewPtr(newValuePtr));
-
-        return LIST_OK;
+        return this->InsertPtr(index, this->CreateNewPtr(&value));
     }
 
     int16 Int16::Get(uint64 index){
@@ -22,9 +20,7 @@ namespace Slice{
     }
 
     int8  Int16::Set(uint64 index, int16 value){
-        int16* newValuePtr = new int16;
-        *newValuePtr = value;
-        return this->SetPtr(index, newValuePtr);
+        return this->SetPtr(index, &value);
     }
 
     int8 Int16::Print(uint64 leftIdx, uint64 rightIdx){

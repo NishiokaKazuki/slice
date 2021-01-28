@@ -3,6 +3,8 @@
 namespace Slice {
 class UInt64:public List{
     public:
+    UInt64();
+    ~UInt64();
     int8   Append(uint64);
     int8   Insert(uint64, uint64);
     uint64 Get   (uint64);

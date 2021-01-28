@@ -3,6 +3,8 @@
 namespace Slice {
 class String:public List{
     public:
+    String();
+    ~String();
     int8 Append(string);
     int8 Insert(uint64, string);
     string Get   (uint64);

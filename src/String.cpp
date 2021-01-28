@@ -1,20 +1,18 @@
 #include "./String.h"
 
 namespace Slice{
-    int8 String::Append(string value){
-        string* newValuePtr = new string;
-        *newValuePtr = value;
-        this->AppendPtr(this->CreateNewPtr(newValuePtr));
+    String::String(){
+        this->SetType(TYPE_STRING);
+    }
 
-        return LIST_OK;
+    String::~String(){}
+
+    int8 String::Append(string value){
+        return this->AppendPtr(this->CreateNewPtr(&value));
     }
 
     int8 String::Insert(uint64 index, string value){
-        string* newValuePtr = new string;
-        *newValuePtr = value;
-        this->InsertPtr(index, this->CreateNewPtr(newValuePtr));
-
-        return LIST_OK;
+        return this->InsertPtr(index, this->CreateNewPtr(&value));
     }
 
     string String::Get(uint64 index){
@@ -22,9 +20,7 @@ namespace Slice{
     }
 
     int8 String::Set(uint64 index, string value){
-        string* newValuePtr = new string;
-        *newValuePtr = value;
-        return this->SetPtr(index, newValuePtr);
+        return this->SetPtr(index, &value);
     }
 
     int8 String::Print(uint64 leftIdx, uint64 rightIdx){

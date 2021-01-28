@@ -1,20 +1,18 @@
 #include "./UInt64.h"
 
 namespace Slice{
-    int8 UInt64::Append(uint64 value){
-        uint64* newValuePtr = new uint64;
-        *newValuePtr = value;
-        this->AppendPtr(this->CreateNewPtr(newValuePtr));
+    UInt64::UInt64(){
+        this->SetType(TYPE_UINT64);
+    }
 
-        return LIST_OK;
+    UInt64::~UInt64(){}
+
+    int8 UInt64::Append(uint64 value){
+        return this->AppendPtr(this->CreateNewPtr(&value));
     }
 
     int8 UInt64::Insert(uint64 index, uint64 value){
-        uint64* newValuePtr = new uint64;
-        *newValuePtr = value;
-        this->InsertPtr(index, this->CreateNewPtr(newValuePtr));
-
-        return LIST_OK;
+        return this->InsertPtr(index, this->CreateNewPtr(&value));
     }
 
     uint64 UInt64::Get(uint64 index){
@@ -22,9 +20,7 @@ namespace Slice{
     }
 
     int8 UInt64::Set(uint64 index, uint64 value){
-        uint64* newValuePtr = new uint64;
-        *newValuePtr = value;
-        return this->SetPtr(index, newValuePtr);
+        return this->SetPtr(index, &value);
     }
 
     int8 UInt64::Print(uint64 leftIdx, uint64 rightIdx){

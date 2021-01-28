@@ -1,20 +1,18 @@
 #include "./Int32.h"
 
 namespace Slice{
-    int8 Int32::Append(int32 value){
-        int32* newValuePtr = new int32;
-        *newValuePtr = value;
-        this->AppendPtr(this->CreateNewPtr(newValuePtr));
+    Int32::Int32(){
+        this->SetType(TYPE_INT32);
+    }
 
-        return LIST_OK;
+    Int32::~Int32(){}
+
+    int8 Int32::Append(int32 value){
+        return this->AppendPtr(this->CreateNewPtr(&value));
     }
 
     int8 Int32::Insert(uint64 index, int32 value){
-        int32* newValuePtr = new int32;
-        *newValuePtr = value;
-        this->InsertPtr(index, this->CreateNewPtr(newValuePtr));
-
-        return LIST_OK;
+        return this->InsertPtr(index, this->CreateNewPtr(&value));
     }
 
     int32 Int32::Get(uint64 index){
@@ -22,9 +20,7 @@ namespace Slice{
     }
 
     int8  Int32::Set(uint64 index, int32 value){
-        int32* newValuePtr = new int32;
-        *newValuePtr = value;
-        return this->SetPtr(index, newValuePtr);
+        return this->SetPtr(index, &value);
     }
 
     int8 Int32::Print(uint64 leftIdx, uint64 rightIdx){
