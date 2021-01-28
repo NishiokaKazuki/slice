@@ -1,4 +1,4 @@
-OUT = lib/alib.a
+OUT = lib/slice.a
 CC = g++
 SDIR = src
 ODIR = obj
