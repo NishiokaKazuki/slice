@@ -20,10 +20,10 @@ int main(){
     // slice.Print(0, slice.Length()-1);
     // printf("%ld\n", slice.Length());
 
-    for(uint64 i = 0; i< 100000; i++){
+    for(uint64 i = 0; i< 10000000; i++){
         slice.Append(i);
     }
-    printf("end");
+    std::cout << "end\n";
     printf("%ld\n", slice.Length());
 
     // Slice::UInt8 u8slice;
