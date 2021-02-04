@@ -5,27 +5,18 @@ ODIR = obj
 INC = -Iinc
 CFLAGS = -Wall -O2
 
-CPP_FILES = ./list.cpp \
-		./Int8.cpp \
-		./Int16.cpp \
-		./Int32.cpp \
-		./Int64.cpp \
-		./UInt8.cpp \
-		./UInt16.cpp \
-		./UInt32.cpp \
-		./UInt64.cpp \
-		./String.cpp
+# CPP_FILES = ./list.cpp \
+# 		./Int8.cpp \
+# 		./Int16.cpp \
+# 		./Int32.cpp \
+# 		./Int64.cpp \
+# 		./UInt8.cpp \
+# 		./UInt16.cpp \
+# 		./UInt32.cpp \
+# 		./UInt64.cpp \
+# 		./String.cpp
 
-_OBJS = list.o \
-		Int8.o \
-		Int16.o \
-		Int32.o \
-		Int64.o \
-		UInt8.o \
-		UInt16.o \
-		UInt32.o \
-		UInt64.o \
-		String.o
+_OBJS = list.o
 
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 
@@ -39,3 +30,6 @@ $(OUT): $(OBJS)
 
 clean:
 	rm -f $(ODIR)/*.o $(OUT)
+
+build:
+	g++ -o main main.cpp src/list.cpp
