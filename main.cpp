@@ -1,4 +1,4 @@
-#include "src/list.h"
+#include "slice.h"
 
 int main(){
     Slice<uint64> slice;
