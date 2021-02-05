@@ -89,10 +89,10 @@ Slice<Type>::~Slice(){
 
 template <class Type>
 Type Slice<Type>::Get(uint64 index){
-    if (index >= this->sliceSize) {return 0;}
+    if (index >= this->sliceSize) {return NULL;}
 
     Node<Type>* node = move(index);
-    if (node == NULL) {return 0;}
+    if (node == NULL) {return NULL;}
     return node->value;
 }
 
@@ -246,7 +246,7 @@ int8 Slice<Type>::Sort(bool (*compare)(Type, Type)) {
 
 template <class Type>
 int8 Slice<Type>::sort(bool (*compare)(Type, Type), uint64 leftIndex, uint64 rightIndex) {
-    Type pivot = leftIndex;
+    uint64 pivot = leftIndex;
     uint64 leftHold = leftIndex;
     uint64 rightHold = rightIndex;
     Node<Type>* leftNodePtr = this->move(++leftIndex);
@@ -269,17 +269,19 @@ int8 Slice<Type>::sort(bool (*compare)(Type, Type), uint64 leftIndex, uint64 rig
     int8 err;
     if (compare(this->move(leftIndex)->value, this->move(pivot)->value)){
         this->Insert(leftIndex + 1, this->move(pivot)->value);
+        pivot = leftIndex;
     }else{
         this->Insert(leftIndex, this->move(pivot)->value);
+        pivot = leftIndex-1;
     }
     this->Remove(leftHold);
 
-    if (int64(leftHold) < int64(leftIndex) - 1) {
-        err = sort(compare, leftHold, leftIndex - 1);
+    if (int64(leftHold) < int64(pivot) - 1) {
+        err = sort(compare, leftHold, pivot - 1);
         if ( SLICE_OK != err ) { return err; }
     }
-    if (int64(rightHold) > int64(leftIndex) + 1) {
-        err = sort(compare, leftIndex + 1, rightHold);
+    if (int64(rightHold) > int64(pivot) + 1) {
+        err = sort(compare, pivot + 1, rightHold);
         if ( SLICE_OK != err ) { return err; }
     }
 
